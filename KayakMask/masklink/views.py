@@ -35,6 +35,9 @@ def MaskIndex(request):
 def MaskSpider(request):
     if request.method == "POST":
         form = MaskChoiceForm(request.POST)
+        if form.is_valid():
+            url = form.cleaned_data.get('link')
+            return HttpResponseRedirect('/masklink/')
     else:
         return HttpResponseRedirect('/masklink/')
 

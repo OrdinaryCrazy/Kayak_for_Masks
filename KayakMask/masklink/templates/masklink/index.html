@@ -3,7 +3,7 @@
 {% block content %}
 
     <h3> Search Mask For Kids </h3>
-    <form method="POST", class="form-horizontal", role="form", action="{% url 'masklink:MaskSpider' %}">
+    <form method="POST", class="form-horizontal", role="form", action="{% url 'masklink:mask_spider' %}">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-group">
