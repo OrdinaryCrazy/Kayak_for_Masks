@@ -17,7 +17,13 @@
         <h3> Search Results </h3>
         <table class="table table-striped">
             <thead>
-
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Availablity</th>
+                <th>Filtration Efficiency</th>
+                <th>Purchasing Link</th>
             </thead>
         <!--------------------------------------------------------------------------->
             <tbody>
@@ -26,10 +32,10 @@
                     <td> {{ mask.name }} </td>
                     <td> {{ mask.brand }} </td>
                     <td> {{ mask.size }} </td>
-                    <td> {{ mask.price }} </td>
+                    <td> ${{ mask.price }}/per mask </td>
                     <td> {{ mask.available }} </td>
-                    <td> {{ mask.fe }} </td>
-                    <td> {{ mask.link }} </td>
+                    <td> {{ mask.fe }}% </td>
+                    <td> <a href="{{mask.link}}">Purchasing </a></td>
                 </tr>
             {% endfor %}
             </tbody>
