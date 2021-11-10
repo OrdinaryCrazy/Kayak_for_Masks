@@ -15,8 +15,10 @@ SizeChoice = (
         ("mid", "Medium"),
     )
 AvaiChoice = (
-        (1, ">=1"),
-        (0, "No require")
+        # (1, ">=1"),
+        # (0, "No require")
+        (1, "Yes"),
+        (0, "No")
     )
 
 class MaskChoiceForm(forms.Form):
