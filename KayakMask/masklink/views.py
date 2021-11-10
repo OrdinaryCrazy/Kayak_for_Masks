@@ -36,7 +36,8 @@ def MaskIndex(request):
 def MaskSpider(request):
     if request.method == "POST":
         form = MaskChoiceForm(data = request.POST or None)
-        if form.is_valid():
+        print(form.is_valid)
+        if form.is_valid:
             # url = form.cleaned_data.get('brand')
             spider = MaskLinkSpider(form)
             spider.spider_all_items()
@@ -60,15 +61,27 @@ class MaskLinkSpider(object):
             'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/edit#gid=15734172'
         )
         self.mask_sheet = sheets[1].get_as_df()
+        # print(self.mask_sheet)
+        # for col in self.mask_sheet.columns:
+        #     print('column name: ', col)
+        #     print(len(col))
         self.data = []
     
     def spider_all_items(self):
         # print(self.mask_sheet["Type of mask"])
-        for i, mask in enumerate(self.mask_sheet):
+        # print('[spider_all_items]')
+        # for col in self.mask_sheet.columns:
+        #     print('column name: ', col)
+        
+        # for i, mask in enumerate(self.mask_sheet,):
+        for i in range(7):
             mask_attribute = {}
             mask_attribute['name'] = self.mask_sheet["Type of mask"][i]
             mask_attribute['brand'] = self.mask_sheet["Brand"][i]
+            
+            # print(mask_attribute['brand'])
             mask_attribute['size'] = self.mask_sheet["Size"][i]
+            # print(mask_attribute['size'])
             mask_attribute['price'] = float(re.findall(r"\$([0-9]+\.*[0-9]*)", self.mask_sheet["Cost per mask"][i])[0])
             mask_attribute['available'] = self.mask_sheet["Availablity"][i]
             mask_attribute['link'] = self.mask_sheet["shoppingLink"][i]
@@ -81,6 +94,7 @@ class MaskLinkSpider(object):
                                         self.mask_sheet["Our results, as worn on kids"][i]), reverse=True),
                                 ])[0])
             self.data.append(mask_attribute)
+            
 
     def save_data_to_model(self):
         MaskInfo.objects.all().delete()
