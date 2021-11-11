@@ -8,7 +8,7 @@
         <p class="font-weight-bold">{{ form.as_p }}</p>
         <div class="form-group">
             <div class="d-grid gap-2">
-                <button type="button" class="btn btn-warning form-control">Run The Crawl</button>
+                <button type="submit" class="btn btn-warning form-control">Run The Crawl</button>
             </div>
         </div>
     </form>
@@ -41,6 +41,7 @@
                 <th>Availablity</th>
                 <th>Filtration Efficiency</th>
                 <th>Purchasing Link</th>
+                <!-- <th>Update Time</th> -->
             </thead>
         <!--------------------------------------------------------------------------->
             <tbody>
@@ -53,6 +54,7 @@
                     <td> {{ mask.available }} </td>
                     <td> {{ mask.fe }}% </td>
                     <td> <a href="{{mask.link}}">Purchasing </a></td>
+                    <!-- <td> {{ mask.time }}% </td> -->
                 </tr>
             {% endfor %}
             </tbody>

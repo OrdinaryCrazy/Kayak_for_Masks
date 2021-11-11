@@ -96,6 +96,7 @@ class MaskLinkSpider(object):
             
             # print(mask_attribute['brand'])
             mask_attribute['size'] = self.mask_sheet["Size"][i]
+            
             # print(mask_attribute['size'])
             mask_attribute['price'] = float(re.findall(r"\$([0-9]+\.*[0-9]*)", self.mask_sheet["Cost per mask"][i])[0])
             mask_attribute['available'] = self.mask_sheet["Availablity"][i]
@@ -108,6 +109,13 @@ class MaskLinkSpider(object):
                                     sorted(re.findall(r"([0-9]+\.*[0-9]*)\%", 
                                         self.mask_sheet["Our results, as worn on kids"][i]), reverse=True),
                                 ])[0])
+            # mask_attribute['time'] = self.mask_sheet["time"][i]     
+                        
+            # if mask_attribute['available'] == str('No'):
+            #     continue 
+
+            # print(mask_attribute)
+            
             self.data.append(mask_attribute)
             
 
@@ -122,6 +130,7 @@ class MaskLinkSpider(object):
             item_model.available = item['available']
             item_model.link = item['link']
             item_model.fe = item['fe']
+            # item_model.time = item['time']
             item_model.save()
 
 # if __name__ == "__main__":
