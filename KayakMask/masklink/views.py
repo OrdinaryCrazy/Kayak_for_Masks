@@ -6,11 +6,26 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from .forms import MaskChoiceForm
 from .models import MaskInfo
-
+#
+from .filters import MaskFilter
+#
 import pygsheets
 
-# Create your views here.
+#Filter 
+def show_all_mask_page(request):
 
+    context = {}
+
+    filtered_masks = MaskFilter(
+        request.GET,
+        queryset=MaskInfo.objects.all()
+    )
+
+    context['filtered_masks'] = filtered_masks.qs 
+
+    return render(request, 'masklink/index.html' , context = context)
+#
+# Create your views here.
 def MaskIndex(request):
     form = MaskChoiceForm()
     maskList = MaskInfo.objects.all()
