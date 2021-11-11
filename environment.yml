@@ -41,6 +41,7 @@ dependencies:
   - wincertstore=0.2=py37haa95532_2
   - pip:
     - cachetools==4.2.4
+    - django-filter==21.1
     - google-api-core==2.2.2
     - google-api-python-client==2.29.0
     - google-auth==2.3.3
@@ -57,4 +58,4 @@ dependencies:
     - requests-oauthlib==1.3.0
     - rsa==4.7.2
     - uritemplate==4.1.1
-prefix: C:\Users\zjt6791\Anaconda3\envs\csce
+prefix: C:\Users\13025\anaconda3\envs\csce
