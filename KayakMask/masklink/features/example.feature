@@ -12,3 +12,8 @@ Scenario: Display all brand
   |Cambridge              |		                  98%|
   When I go to the home page
   Then I should see all the brand on display
+  And I should see all the product items that are available to purchase 
+
+Scenario: Purchase
+  When I click the purchase link
+  Then I should jump to the product page
