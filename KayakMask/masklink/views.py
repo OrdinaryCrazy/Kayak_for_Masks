@@ -121,6 +121,7 @@ class MaskLinkSpider(object):
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
         elif self.form['avai'].data == '0':
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # Filtering end
 
         print(self.mask_sheet)
         self.mask_sheet.reset_index(drop=True, inplace=True) # generate new sequential index
@@ -133,6 +134,7 @@ class MaskLinkSpider(object):
         #     print('column name: ', col)
         
         # for i, mask in enumerate(self.mask_sheet,):
+        # self.mask_sheet.shape[0] is the dynamic depth of the form.
         for i in range(self.mask_sheet.shape[0]):
             mask_attribute = {}
             mask_attribute['name'] = self.mask_sheet["Type of mask"][i]
