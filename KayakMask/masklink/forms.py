@@ -1,5 +1,11 @@
 from django import forms
 
+SortChoice = (
+        ("manufacture", "Brand/Manufacture"),
+        ("size", "Size"),
+        ("avialability", "Availability"),
+    )
+
 BrandChoice = (
         ("3m_vflex", "3M Vflex"),
         ("pod", "POD"),
@@ -22,6 +28,7 @@ AvaiChoice = (
     )
 
 class MaskChoiceForm(forms.Form):
+    sorting = forms.CharField(label="Sort", widget = forms.RadioSelect(choices=SortChoice))
     brand = forms.CharField(label="Brand/Manufacture", widget = forms.RadioSelect(choices=BrandChoice))
     size = forms.CharField(label="Size", widget = forms.RadioSelect(choices=SizeChoice))
     avai = forms.IntegerField(label="Availability", widget = forms.RadioSelect(choices=AvaiChoice))
