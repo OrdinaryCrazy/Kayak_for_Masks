@@ -32,7 +32,29 @@ AvaiChoice = (
     )
 
 class MaskChoiceForm(forms.Form):
-    sorting = forms.CharField(label="Sort", widget = forms.RadioSelect(choices=SortChoice))
-    brand = forms.CharField(label="Brand/Manufacture", widget = forms.RadioSelect(choices=BrandChoice))
-    size = forms.CharField(label="Size", widget = forms.RadioSelect(choices=SizeChoice))
-    avai = forms.IntegerField(label="Availability", widget = forms.RadioSelect(choices=AvaiChoice))
+    sorting = forms.CharField(
+        label="Sort", 
+        widget = forms.RadioSelect(choices=SortChoice), 
+        required=True,
+        initial="manufacture",
+    )
+    brand = forms.MultipleChoiceField(
+        label="Brand/Manufacture", 
+        choices=BrandChoice, 
+        widget=forms.CheckboxSelectMultiple(), 
+        required=True,
+        initial=["3m_vflex", "pod", "happy_mask", "flo_mask", "wayre", "carra", "cambridge", "honeywell"]
+    )
+    size = forms.MultipleChoiceField(
+        label="Size", 
+        choices=SizeChoice, 
+        widget=forms.CheckboxSelectMultiple(), 
+        required=True,
+        initial=["small", "mid", "onesize", "XS", "M", "S"]
+    )
+    avai = forms.IntegerField(
+        label="Availability", 
+        widget = forms.RadioSelect(choices=AvaiChoice), 
+        required=True,
+        initial=1,
+    )

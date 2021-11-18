@@ -68,13 +68,15 @@ class MaskLinkSpider(object):
     def __init__(self, form) -> None:
         super().__init__()
         self.form = form
-        google_client = pygsheets.authorize(service_file=r"C:\Users\13025\Desktop\CSCE606\Kayak_for_Masks\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
+        google_client = pygsheets.authorize(service_file=r"./masklink/astute-being-331516-f44fa7b84e38.json")
         sheets = google_client.open_by_url(
             # 'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/'
             'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/edit#gid=15734172'
         )
         self.mask_sheet = sheets[1].get_as_df()
         print(self.mask_sheet)
+        # will return a list
+        print(self.form["brand"].data)
 
         # for col in self.mask_sheet.columns:
         #     print('column name: ', col)
@@ -219,7 +221,7 @@ class MaskLinkSpider(object):
         
         
         # Filtering end
-#######################################################################
+    #######################################################################
 
         if self.form['avai'].data == "1":
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
