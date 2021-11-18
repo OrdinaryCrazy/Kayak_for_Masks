@@ -11,13 +11,11 @@ from .filters import MaskFilter
 #
 import pygsheets
 
-#Filter 
+#Filter
 def show_all_mask_page(request):
 
     context = {}
-
     print("here")
-
     filtered_masks = MaskFilter(
         request.GET,
         queryset=MaskInfo.objects.all()
@@ -26,6 +24,24 @@ def show_all_mask_page(request):
     context['filtered_masks'] = filtered_masks.qs 
 
     return render(request, 'masklink/index.html' , context = context)
+'''
+def show_all_mask_page(request):
+
+    maskinfo = MaskInfo.objects.all()
+    
+    myFilter = MaskFilter(
+        request.Get, 
+        queryset=maskinfo
+    )
+    maskinfo = myFilter.qs
+
+    context = {
+        'maskinfo': maskinfo,
+        'myFilter': myFilter
+    }
+
+    return render(request, 'masklink/index.html' , context = context)
+'''
 #
 # Create your views here.
 def MaskIndex(request):
@@ -68,19 +84,18 @@ def MaskSpider(request):
     else:
         return HttpResponseRedirect('/masklink/')
 
-# CLick "Run The Crawl" will call this class -- Siqi
 class MaskLinkSpider(object):
     def __init__(self, form) -> None:
         super().__init__()
         self.form = form
-
-        google_client = pygsheets.authorize(service_file=r"/home/siqi/CSCE606_project/Kayak_for_Masks/KayakMask/masklink/astute-being-331516-f44fa7b84e38.json")
+        google_client = pygsheets.authorize(service_file=r"E:\TAMU\courses\CSCE606\Kayak_for_Masks-main\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
         sheets = google_client.open_by_url(
             # 'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/'
             'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/edit#gid=15734172'
         )
         self.mask_sheet = sheets[1].get_as_df()
         print(self.mask_sheet)
+
         # for col in self.mask_sheet.columns:
         #     print('column name: ', col)
         #     print(len(col))
@@ -94,8 +109,21 @@ class MaskLinkSpider(object):
             self.mask_sheet.sort_values('Availablity', ascending=False, inplace=True)
         # Sorting end
 
-        self.mask_sheet.reset_index(drop=True, inplace=True) # generate new sequential index
+        # Filtering -- Hanzhou
+        if self.form['size'].data == "small":
+            # In the goole form, 'Medium' might be 'Medium ', 'Medium  ' and etc (with multiple spaces). 
+            # So we handle 'Small' instead of 'Medium'.
+            self.mask_sheet = self.mask_sheet[(self.mask_sheet['Size']=='Small')]
+        elif self.form['size'].data == 'mid':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+        
+        if self.form['avai'].data == "1":
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
+        elif self.form['avai'].data == '0':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
 
+        print(self.mask_sheet)
+        self.mask_sheet.reset_index(drop=True, inplace=True) # generate new sequential index
         self.data = []
     
     def spider_all_items(self):
@@ -105,7 +133,7 @@ class MaskLinkSpider(object):
         #     print('column name: ', col)
         
         # for i, mask in enumerate(self.mask_sheet,):
-        for i in range(8):
+        for i in range(self.mask_sheet.shape[0]):
             mask_attribute = {}
             mask_attribute['name'] = self.mask_sheet["Type of mask"][i]
             mask_attribute['brand'] = self.mask_sheet["Brand"][i]
