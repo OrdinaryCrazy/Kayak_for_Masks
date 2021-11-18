@@ -19,6 +19,10 @@ BrandChoice = (
 SizeChoice = (
         ("small", "Small"),
         ("mid", "Medium"),
+        ("onesize", "OneSize"),
+        ("XS", "XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)"),
+        ("M", "M: 5.9x7.5 inch"),
+        ("S", "S: 5.5x6.7 inch")
     )
 AvaiChoice = (
         # (1, ">=1"),

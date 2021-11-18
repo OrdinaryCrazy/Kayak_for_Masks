@@ -96,7 +96,131 @@ class MaskLinkSpider(object):
             self.mask_sheet = self.mask_sheet[(self.mask_sheet['Size']=='Small')]
         elif self.form['size'].data == 'mid':
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='OneSize'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='M: 5.9x7.5 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
+
+        # Add More Filtering Items (Size) -- Yuncheng 
+        elif self.form['size'].data == 'onesize':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='M: 5.9x7.5 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Medium'], inplace=True)
+        elif self.form['size'].data == 'XS':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Medium'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='M: 5.9x7.5 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='OneSize'], inplace=True)
+        elif self.form['size'].data == 'S':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Medium'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='M: 5.9x7.5 inch'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='OneSize'], inplace=True)
+        elif self.form['size'].data == 'M':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Medium'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='OneSize'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
+
+        # Add Brands Items (Brands) -- Yuncheng 
+
+        if self.form['brand'].data == "3m_vflex":
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+
+        elif self.form['brand'].data == 'pod':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+
+        elif self.form['brand'].data == 'happy_mask':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+
+        elif self.form['brand'].data == 'flo_mask':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+
+        elif self.form['brand'].data == 'wayre':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
         
+        elif self.form['brand'].data == 'carra':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+        
+        elif self.form['brand'].data == 'cambridge':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Honeywell'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+        
+        elif self.form['brand'].data == 'honeywell':
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Flomask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Cambridge'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Caraa Tailored Junior Mask'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+
+
+
+
+        # elif self.form['Brand/Manufacture'].data == 'happy_mask':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # elif self.form['Brand/Manufacture'].data == 'flo_mask':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # elif self.form['Brand/Manufacture'].data == 'wayre':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # elif self.form['Brand/Manufacture'].data == 'carra':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # elif self.form['Brand/Manufacture'].data == 'cambridge':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        # elif self.form['Brand/Manufacture'].data == 'honeywell':
+        #     self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+        
+        
+        # Filtering end
+#######################################################################
+
         if self.form['avai'].data == "1":
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
         elif self.form['avai'].data == '0':
