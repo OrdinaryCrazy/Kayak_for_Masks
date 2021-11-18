@@ -111,8 +111,8 @@ class MaskLinkSpider(object):
                                 ])[0])
             # mask_attribute['time'] = self.mask_sheet["time"][i]     
                         
-            # if mask_attribute['available'] == str('No'):
-            #     continue 
+            if mask_attribute['available'] == str('No'):
+                continue 
 
             # print(mask_attribute)
             
