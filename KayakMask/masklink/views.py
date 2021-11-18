@@ -74,7 +74,7 @@ class MaskLinkSpider(object):
         super().__init__()
         self.form = form
 
-        google_client = pygsheets.authorize(service_file=r"/home/siqi/CSCE606_project/Kayak_for_Masks/KayakMask/masklink/astute-being-331516-f44fa7b84e38.json")
+        google_client = pygsheets.authorize(service_file=r"C:\Users\13025\Desktop\CSCE606\Kayak_for_Masks\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
         sheets = google_client.open_by_url(
             # 'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/'
             'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/edit#gid=15734172'
