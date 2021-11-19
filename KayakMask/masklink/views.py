@@ -78,17 +78,17 @@ class MaskLinkSpider(object):
         # will return a list
         print(self.form["brand"].data)
 
-        # for col in self.mask_sheet.columns:
-        #     print('column name: ', col)
-        #     print(len(col))
+        for col in self.mask_sheet.columns:
+            print('column name: ', col)
+            print(len(col))
 
         # Sorting -- Siqi
-        if self.form['sorting'].data == "manufacture":
-            self.mask_sheet = self.mask_sheet.sort_values('Brand')
-        elif self.form['sorting'].data == "size":
+        if self.form['sorting'].data == "size":
             self.mask_sheet.sort_values('Size', ascending=False, inplace=True)
-        elif self.form['sorting'].data == "avialability":
-            self.mask_sheet.sort_values('Availablity', ascending=False, inplace=True)
+        elif self.form['sorting'].data == "filtration":
+            self.mask_sheet.sort_values('Claimed filtration efficiency', ascending=False, inplace=True)
+        elif self.form['sorting'].data == "name":
+            self.mask_sheet.sort_values('Type of mask', inplace=True)
         # Sorting end
 
         # Filtering -- Hanzhou
@@ -229,7 +229,7 @@ class MaskLinkSpider(object):
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
         # Filtering end
 
-        print(self.mask_sheet)
+        # print(self.mask_sheet)
         self.mask_sheet.reset_index(drop=True, inplace=True) # generate new sequential index
         self.data = []
     

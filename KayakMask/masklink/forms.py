@@ -1,9 +1,9 @@
 from django import forms
 
 SortChoice = (
-        ("manufacture", "Brand/Manufacture"),
         ("size", "Size"),
-        ("avialability", "Availability"),
+        ("filtration", "Filtration"),
+        ("name", "Name"),
     )
 
 BrandChoice = (
@@ -50,6 +50,7 @@ class MaskChoiceForm(forms.Form):
         choices=SizeChoice, 
         widget=forms.CheckboxSelectMultiple(), 
         required=True,
+        #initial=[1, 2, 3, 4, 5, 6]
         initial=["small", "mid", "onesize", "XS", "M", "S"]
     )
     avai = forms.IntegerField(
