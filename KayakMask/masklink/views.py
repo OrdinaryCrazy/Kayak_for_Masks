@@ -91,7 +91,8 @@ class MaskLinkSpider(object):
             self.mask_sheet.sort_values('Type of mask', inplace=True)
         # Sorting end
 
-        # Filtering -- Hanzhou
+        # Single-Size Filtering Starts -- Hanzhou
+        '''
         if self.form['size'].data == "small":
             # In the goole form, 'Medium' might be 'Medium ', 'Medium  ' and etc (with multiple spaces). 
             # So we handle 'Small' instead of 'Medium'.
@@ -102,8 +103,9 @@ class MaskLinkSpider(object):
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='M: 5.9x7.5 inch'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
-
+        
         # Add More Filtering Items (Size) -- Yuncheng 
+        
         elif self.form['size'].data == 'onesize':
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='Small'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
@@ -128,9 +130,11 @@ class MaskLinkSpider(object):
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='OneSize'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='XS: 4.7x5.3 inch (Toddler, Valveless, Non-Adjustable)'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']=='S: 5.5x6.7 inch'], inplace=True)
-
-        # Add Brands Items (Brands) -- Yuncheng 
-
+        '''
+        # Single-Size Filtering Ends
+        
+        # Single-Brand Filtering Starts -- Yuncheng 
+        '''
         if self.form['brand'].data == "3m_vflex":
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Happy Mask'], inplace=True)
@@ -202,8 +206,37 @@ class MaskLinkSpider(object):
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='POD'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='Wayre'], inplace=True)
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']=='3M Vflex'], inplace=True)
+        '''
+        # Single-Brand Filtering Ends
+        
 
+        # Multi-Size Filtering Starts
+        print('form brand column data =', self.form['size'].data)
 
+        size_list_low = ['small', 'mid', 'onesize', 'XS', 'M', 'S']
+        size_list_up = ['Small', 'Medium', 'Onesize', 'XS', 'M', 'S']
+
+        rmv_size_list = list(set(size_list_low)-set(self.form['size'].data))
+        for size_low in rmv_size_list:
+            size_list_index = size_list_low.index(size_low)
+            size_up = size_list_up[size_list_index]
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Size']==size_up], inplace=True)
+
+        # Multi-Size Filtering Ends
+
+        # Multi-Brand Filter Starts
+        print('form brand column data =', self.form['brand'].data)
+
+        brand_list_low = ['3m_vflex', 'pod', 'happy_mask', 'flo_mask', 'wayre', 'carra', 'cambridge', 'honeywell']
+        brand_list_up =  ['3M Vflex', 'POD', 'Happy Mask', 'Flomask', 'Wayre', 'Caraa Tailored Junior Mask', 'Cambridge', 'Honeywell']
+        
+        rmv_brand_list = list(set(brand_list_low)-set(self.form['brand'].data))
+
+        for brand_low in rmv_brand_list:
+            brand_list_index = brand_list_low.index(brand_low)
+            brand_up = brand_list_up[brand_list_index]
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']==brand_up], inplace=True)
+        # Multi-Brand Filter Ends
 
 
         # elif self.form['Brand/Manufacture'].data == 'happy_mask':
