@@ -1,10 +1,12 @@
+from django import forms
+from django.forms.forms import Form
 from django.test import TestCase
 from django.db import models
 from masklink.models import MaskInfo
 from django.urls.conf import _path,path
 from functools import partial
-from django.urls.resolvers import RoutePattern, URLPattern
-from masklink.views import MaskIndex, MaskSpider
+from django.urls.resolvers import RoutePattern
+from masklink.views import MaskIndex, MaskSpider, MaskChoiceForm
 from .urls import urlpatterns
 # Create your tests here.
 
@@ -33,3 +35,41 @@ class MaskLinkTestCase(TestCase):
         ]
     def test_Link(self):
         path.click = urlpatterns
+
+#Test cases for 
+class SortingTestCase(TestCase):
+    def SortingSetUp(self, request, form):
+        MaskChoiceForm.form.data = request.POST or None
+        form = MaskChoiceForm.form.data
+    
+    def test_Sorting(form):
+        if form == "size":
+            form.mask_sheet.sort_values('Size', ascending=False, inplace=True)
+        elif form == "filtration":
+            form.mask_sheet.sort_values('Claimed filtration efficiency', ascending=False, inplace=True)
+        elif form == "name":
+            form.mask_sheet.sort_values('Type of mask', inplace=True)
+        # Sorting end
+
+#FilterTest(one example)
+class FilterTestCase(TestCase):
+    def FilterSetup(self, request, mask_sheet):
+        MaskChoiceForm.mask_sheet = request.POST or None
+        mask_sheet = MaskChoiceForm.mask_sheet
+    def test_Filter(mask_sheet):
+        if mask_sheet == "small":
+            mask_sheet = mask_sheet[(mask_sheet['Size']=='Small')]
+
+#availabilityTest
+class availabilityTestCase(TestCase):
+    def avaSetup(self, request, form, index, mask_sheet, avaStat):
+        MaskChoiceForm.form.data = request.POST or None
+        index = MaskChoiceForm.form.mask_sheet.index
+        mask_sheet = MaskChoiceForm.form.mask_sheet
+        form = MaskChoiceForm.form.data.mask_sheet.drop(index[mask_sheet['avai'].data])
+
+    def test_Ava(form):
+        if form == "1":
+            form['Availablity']=='No'
+        elif form  == '0':
+            form['Availablity']=='Yes'
