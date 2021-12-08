@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from .forms import MaskChoiceForm
 from .models import MaskInfo
+from .spider_1206 import Spider
 
 import pygsheets
 
@@ -83,6 +84,10 @@ class MaskLinkSpider(object):
             print('column name: ', col)
             print(len(col))
 
+        # Obtain current price -- Siqi
+        for ind in range (len(self.mask_sheet['shoppingLink'])):
+            self.mask_sheet.at[ind,'Cost per mask'] = Spider().abstract_price(self.mask_sheet['shoppingLink'][ind])
+
         # Sorting -- Siqi
         if self.form['sorting'].data == "size":
             self.mask_sheet.sort_values('Size', ascending=False, inplace=True)
@@ -114,13 +119,12 @@ class MaskLinkSpider(object):
         
         rmv_brand_list = list(set(brand_list_low)-set(self.form['brand'].data))
 
+
         for brand_low in rmv_brand_list:
             brand_list_index = brand_list_low.index(brand_low)
             brand_up = brand_list_up[brand_list_index]
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Brand']==brand_up], inplace=True)
         # Multi-Brand Filter Ends
-
-    #######################################################################
 
         if self.form['avai'].data == "1":
             self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
@@ -133,7 +137,6 @@ class MaskLinkSpider(object):
         self.data = []
     
     def spider_all_items(self):
-
         for i in range(self.mask_sheet.shape[0]):
             mask_attribute = {}
             mask_attribute['name'] = self.mask_sheet["Type of mask"][i]
