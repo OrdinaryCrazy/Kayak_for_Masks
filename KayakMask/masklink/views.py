@@ -83,9 +83,8 @@ class MaskLinkSpider(object):
             print('column name: ', col)
             print(len(col))
 
-        # Obtain current price
+        # Obtain current price -- Siqi
         for ind in range (len(self.mask_sheet['shoppingLink'])):
-            print(type(self.mask_sheet['Cost per mask']))
             self.mask_sheet.at[ind,'Cost per mask'] = Spider().abstract_price(self.mask_sheet['shoppingLink'][ind])
 
         # Sorting -- Siqi
