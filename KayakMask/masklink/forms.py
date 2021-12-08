@@ -28,7 +28,7 @@ AvaiChoice = (
         # (1, ">=1"),
         # (0, "No require")
         (1, "Yes"),
-        (0, "No")
+        (0, "All")
     )
 
 class MaskChoiceForm(forms.Form):
