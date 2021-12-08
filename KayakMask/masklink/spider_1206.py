@@ -46,26 +46,38 @@ class Spider(object):
         return price
 
     def abstract_price(self, url):
-        # modify each if/elif to change the format we abstract price
-        if url == 'https://www.3m.com/3M/en_US/p/d/v000075539/': 
-            url = 'https://www.podsupplies.com/products/kids-mask'           
-            s_div_name = 'price__sale'
-            o_div_name = 'price__regular'
-            sale_span_name = 'price-item price-item--sale'
-            orig_span_name = 'price-item price-item--regular'
-        else:
+
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36', "Upgrade-Insecure-Requests": "1","DNT": "1","Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Accept-Language": "en-US,en;q=0.5","Accept-Encoding": "gzip, deflate"}
+        req = requests.get(url, headers=headers)
+        
+        # modify each if/elif to abstract price -- Siqi
+        if url == 'https://www.podsupplies.com/products/kids-mask':
             url = 'https://www.podsupplies.com/products/kids-mask'
             s_div_name = 'price__sale'
             o_div_name = 'price__regular'
             sale_span_name = 'price-item price-item--sale'
             orig_span_name = 'price-item price-item--regular'
-    
-        s_div = self.get_price_div(url, s_div_name)
-        sale_price = self.get_price(s_div, sale_span_name,'span').strip()
-    
-        o_div = self.get_price_div(url, o_div_name)
-        orig_price = self.get_price(o_div, orig_span_name, 'span').strip()
-        print(sale_price, orig_price)
+            s_div = self.get_price_div(url, s_div_name)
+            sale_price = self.get_price(s_div, sale_span_name,'span').strip()
+
+        elif url == 'https://www.shopwayre.com/collections/all/products/kids-high-tech-washable-mask':
+            # There are many prices in this page, I choose only one from them -- Siqi
+            soup = BeautifulSoup(req.text, 'html.parser')
+            texts = soup.find('meta', property='product:price:amount')
+            sale_price = '$'+texts["content"]
+
+        else:
+            # THis is usless
+            url = 'https://www.podsupplies.com/products/kids-mask'
+            s_div_name = 'price__sale'
+            o_div_name = 'price__regular'
+            sale_span_name = 'price-item price-item--sale'
+            orig_span_name = 'price-item price-item--regular'
+            s_div = self.get_price_div(url, s_div_name)
+            sale_price = self.get_price(s_div, sale_span_name,'span').strip()
+            # o_div = self.get_price_div(url, o_div_name)
+            # orig_price = self.get_price(o_div, orig_span_name, 'span').strip()
+        print(sale_price)
         return sale_price
   
     
