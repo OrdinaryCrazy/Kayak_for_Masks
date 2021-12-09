@@ -68,7 +68,8 @@ class MaskLinkSpider(object):
     def __init__(self, form) -> None:
         super().__init__()
         self.form = form
-        google_client = pygsheets.authorize(service_file=r"C:\Users\makei\OneDrive\Documents\GitHub\Kayak_for_Masks\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
+        # google_client = pygsheets.authorize(service_file=r"C:\Users\makei\OneDrive\Documents\GitHub\Kayak_for_Masks\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
+        google_client = pygsheets.authorize(service_file="./masklink/astute-being-331516-f44fa7b84e38.json")
         sheets = google_client.open_by_url(
             # 'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/'
             'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/edit#gid=15734172'
