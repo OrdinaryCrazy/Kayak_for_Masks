@@ -28,7 +28,7 @@ AvaiChoice = (
         # (1, ">=1"),
         # (0, "No require")
         (1, "Yes"),
-        (0, "No")
+        (0, "All")
     )
 
 class MaskChoiceForm(forms.Form):
@@ -37,6 +37,7 @@ class MaskChoiceForm(forms.Form):
         widget = forms.RadioSelect(choices=SortChoice), 
         required=True,
         initial="name",
+
     )
     brand = forms.MultipleChoiceField(
         label="Brand/Manufacture", 
@@ -50,11 +51,12 @@ class MaskChoiceForm(forms.Form):
         choices=SizeChoice, 
         widget=forms.CheckboxSelectMultiple(), 
         required=True,
-        initial=["small", "mid", "onesize", "XS", "M", "S"]
-    )
+        initial=["small", "mid", "onesize", "XS", "M", "S"])
+        
     avai = forms.IntegerField(
         label="Availability", 
         widget = forms.RadioSelect(choices=AvaiChoice), 
         required=True,
         initial=1,
     )
+
