@@ -44,7 +44,7 @@ class MaskChoiceForm(forms.Form):
         choices=BrandChoice, 
         widget=forms.CheckboxSelectMultiple(), 
         required=True,
-        # initial=["3m_vflex", "pod", "happy_mask", "flo_mask", "wayre", "carra", "cambridge", "honeywell"]
+        initial=["3m_vflex", "pod", "happy_mask", "flo_mask", "wayre", "carra", "cambridge", "honeywell"]
     )
     size = forms.MultipleChoiceField(
         label="Size", 
@@ -57,6 +57,6 @@ class MaskChoiceForm(forms.Form):
         label="Availability", 
         widget = forms.RadioSelect(choices=AvaiChoice), 
         required=True,
-        # initial=1,
+        initial=1,
     )
 
