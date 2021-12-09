@@ -70,10 +70,6 @@ class MaskLinkSpider(object):
     def __init__(self, form) -> None:
         super().__init__()
         self.form = form
-<<<<<<< HEAD
-        # google_client = pygsheets.authorize(service_file=r"C:\Users\makei\OneDrive\Documents\GitHub\Kayak_for_Masks\KayakMask\masklink\astute-being-331516-f44fa7b84e38.json")
-=======
->>>>>>> 13c8d31cd72dde90657af585261854ce614397d2
         google_client = pygsheets.authorize(service_file="./masklink/astute-being-331516-f44fa7b84e38.json")
         sheets = google_client.open_by_url(
             # 'https://docs.google.com/spreadsheets/d/17HEwAGxVkFrqZM6hSorVJHUHI7gyQjBagGszc4I5VLw/'
@@ -90,6 +86,7 @@ class MaskLinkSpider(object):
 
         # Obtain current price -- Siqi
         for ind in range (len(self.mask_sheet['shoppingLink'])):
+            print(self.mask_sheet['shoppingLink'][ind])
             print("before:" + str(self.mask_sheet.at[ind,'Cost per mask']))
             self.mask_sheet.at[ind,'Cost per mask'] = Spider().abstract_price(self.mask_sheet['shoppingLink'][ind])
             print("after:" + str(self.mask_sheet.at[ind,'Cost per mask']))

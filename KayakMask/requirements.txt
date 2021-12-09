@@ -3,3 +3,5 @@ pygsheets==2.0.5
 django-filter==21.1
 pandas
 dj-database-url==0.5.0
+bs4
+lxml
