@@ -52,7 +52,6 @@ class Spider(object):
         
         # modify each if/elif to abstract price -- Siqi
         if url == 'https://www.podsupplies.com/products/kids-mask':
-            url = 'https://www.podsupplies.com/products/kids-mask'
             s_div_name = 'price__sale'
             o_div_name = 'price__regular'
             sale_span_name = 'price-item price-item--sale'
@@ -63,8 +62,18 @@ class Spider(object):
         elif url == 'https://www.shopwayre.com/collections/all/products/kids-high-tech-washable-mask':
             # There are many prices in this page, I choose only one from them -- Siqi
             soup = BeautifulSoup(req.text, 'html.parser')
-            texts = soup.find('meta', property='product:price:amount')
-            sale_price = '$'+texts["content"]
+
+            # old price obtain
+            # texts = soup.find('meta', property='product:price:amount')
+            # sale_price = '$'+texts["content"]
+
+            # price for bundle of 3 (per mask)
+            texts = soup.find('script', type='application/ld+json').get_text().split('\n')
+            price_texts = texts[8]
+            i = 0
+            while price_texts[i] != ':':
+                i += 1
+            sale_price = '$' + str(float(price_texts[i+2:i+7])/3)
 
         else:
             # THis is usless
