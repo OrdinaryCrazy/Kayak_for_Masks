@@ -129,9 +129,9 @@ class MaskLinkSpider(object):
         # Multi-Brand Filter Ends
 
         if self.form['avai'].data == "1":
-            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='No'], inplace=True)
-        elif self.form['avai'].data == '0':
-            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
+            self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='All'], inplace=True)
+        #elif self.form['avai'].data == '0':
+        #    self.mask_sheet.drop(self.mask_sheet.index[self.mask_sheet['Availablity']=='Yes'], inplace=True)
         # Filtering end
 
         # print(self.mask_sheet)
