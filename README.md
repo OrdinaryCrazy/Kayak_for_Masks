@@ -1,4 +1,11 @@
 # Kayak_for_Masks
+
+# Heroku Deployment
+
+http://masklink.herokuapp.com/masklink/
+
+# Coding Setup
+
 # Step 1. 
 Set up Python Django environment using environment.yml file (Linux or Window). You can use any virtual Environment, such as Conda. 
 ```
